@@ -1,0 +1,27 @@
+{
+  "name": "simple-vue",
+  "version": "1.0.0",
+  "description": "build my own vue",
+  "main": "index.js",
+  "scripts": {
+    "dev": "rollup -c -w"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/wlin00/simple-vue.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/wlin00/simple-vue/issues"
+  },
+  "homepage": "https://github.com/wlin00/simple-vue#readme",
+  "devDependencies": {
+    "@babel/core": "^7.19.0",
+    "@babel/preset-env": "^7.19.0",
+    "rollup": "^2.79.0",
+    "rollup-plugin-babel": "^4.4.0",
+    "rollup-plugin-serve": "^2.0.1"
+  }
+}
