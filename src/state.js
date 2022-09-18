@@ -10,10 +10,12 @@ export function initState (vm) {
   if (options.data) {
     initData(vm)
   }
+  if (options.computed) {
+    
+  }
 }
 
 function initData(vm) {
-  console.log(vm)
   let data = vm.$options.data
   data = typeof data === 'function' ? data.call(vm) : data || {}
   vm._data = data

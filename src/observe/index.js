@@ -43,7 +43,6 @@ function defineReactive(target, key, value) {
       if (newValue === value) {
         return // 若当前改变的值和data中属性值一样，则return
       }
-      console.log('set', newValue)
       observe(newValue) // 此处为了挟持newValue修改为对象后，新对象内部的数据
       value = newValue
     }
