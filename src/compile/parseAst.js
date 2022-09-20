@@ -8,6 +8,7 @@ const endTag = new RegExp(`^<\\/${qnameCapture}[^>]*>`)
 const doctype = /^<!DOCTYPE [^>]+>/i
 const comment = /^<!\--/
 const conditionalComment = /^<!\[/
+const defaultTagRE = /\{\{((?:.|\n)+?)\}\}/g // 匹配差值表达式
 
 // 定义变量用于存储生成后的ast
 let root = null // root表示ast语法树的根节点
