@@ -20,7 +20,7 @@ export function generate(ast) { // 输入ast节点，生成render字符串
     ${ast.attrs.length ? `${genProps(ast.attrs)}` : 'null'},
     ${children ? `${children}` : 'null'}
   )`
-  console.log('code：', code)
+  return code
 }
 
 function getAstChildren (ast) { // 获取ast子集字符串如：_v('hello' + _s(msg))
