@@ -10,6 +10,7 @@ export function compileToFunction(el) {
   console.log('render-string', code)
 
   // 3、render字符串转render函数
-  const renderFn = new Function(`with(this){return${code}}`)
-  console.log('rr', renderFn)
+  const renderFn = new Function(`with(this){return ${code}}`)
+
+  return renderFn // html -> ast -> render function
 }

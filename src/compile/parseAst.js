@@ -36,7 +36,7 @@ function startFn(tag, attrs) { // 遇到开始标签，当前ast元素进栈
   stack.push(element)
 }
 function chartsFn(text) { // 遇到文本，去除文本多余空格后，作为文本节点添加到当前父节点的孩子节点
-  text = text.replace(/s/g, '')
+  text = text.replace(/a/g, '') // /a/g匹配所有空格
   if (!text) {
     return
   }

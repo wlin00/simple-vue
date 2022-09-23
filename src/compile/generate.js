@@ -16,7 +16,7 @@ export function generate(ast) { // 输入ast节点，生成render字符串
   console.log('get - ast', ast)
   const children = getAstChildren(ast) // 获取ast子集字符串如：_v('hello' + _s(msg))
   let code = `_c(
-    ${ast.tag},  
+    '${ast.tag}',  
     ${ast.attrs.length ? `${genProps(ast.attrs)}` : 'null'},
     ${children ? `${children}` : 'null'}
   )`

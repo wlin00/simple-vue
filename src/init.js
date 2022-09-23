@@ -1,5 +1,6 @@
 import { initState } from './state'
 import { compileToFunction } from './compile/index'
+import { mountComponent } from './lifeCycle'
 
 export function initMixin (Vue) {
   Vue.prototype._init = function (options) {
@@ -27,8 +28,13 @@ export function initMixin (Vue) {
       const template = options.template
       if (el && !template) { //若无template，走el的outerHTML进行模版编译
         el = el.outerHTML
-        compileToFunction(el) // html -> ast -> render
+        const render = compileToFunction(el) // html -> ast -> render
+        // 有了render函数后，存储到vm，
+        options.render = render
+        // 后续流程：（1）render函数转虚拟Dom；（2）虚拟Dom转真实Dom（3）渲染页面
       }
     }
+    // 若有render 则可以直接走后续流程：mountComponent来转render为虚拟Dom -> 转真实Dom -> 渲染（挂载组件）
+    mountComponent(vm, el)
   }
 }
