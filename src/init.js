@@ -6,7 +6,6 @@ export function initMixin (Vue) {
   Vue.prototype._init = function (options) {
     console.log('vm', this)
     const vm = this
-    vm.$el = document.querySelector(options.el)
     vm.$options = options
     vm.$data = options.data
     vm._self = vm
@@ -23,6 +22,7 @@ export function initMixin (Vue) {
     // 先看有无render， 若无则先看有无templat，有的话template转render / 无的话取el.outerHTML作为template
     const vm = this
     el = document.querySelector(el) // 获取dom元素
+    vm.$el = el // 在$mount后能获取到$el
     const options = vm.$options
     if (!options.render) { // 若无render
       const template = options.template

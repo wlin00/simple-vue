@@ -16,7 +16,7 @@ export function renderMixin(Vue) {
     let vm = this
     let render = vm.$options.render
     let vnode = render.call(this)
-    console.log('vnode~~~~~~~~~~~~~~~`', vnode)
+    return vnode
   }
 
   Vue.prototype._c = function() { // render函数生成虚拟Dom的过程中，中对元素的处理
@@ -34,21 +34,21 @@ export function renderMixin(Vue) {
 
 // 工具方法 - 创建元素虚拟节点
 function createElement(tag, data, ...children) {
-  console.log('tag', tag, 'data', data, 'cd', children)
-  return vnode(tag, data, (data || {}).key, children)
+  return vnode(tag, data, (data || {}).key, 1, children) // 元素节点type为1
 }
 
 // 工具方法 - 创建文本虚拟节点
-function createText(text) {
-  return vnode(undefined, undefined, undefined, undefined, text) // tag、data、key、children、text
+function createText(text) {  // 元素节点type为3
+  return vnode(undefined, undefined, undefined, 3, undefined, text) // tag、data、key、children、text
 }
 
 // 工具方法 - 创建vnode
-function vnode(tag, data, key, children, text) {
+function vnode(tag, data, key, type, children, text) {
   return {
     tag,
     data,
     key,
+    type,
     children,
     text
   }
