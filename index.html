@@ -10,6 +10,14 @@
   <div id="app" key="d1" style="color: red; font-size: 20px;"> hello {{ msg }}<h2>张三{{ name }}</h2></div>
   <script src="./dist/vue.js"></script>
   <script>
+    // 测试mixin
+    Vue.Mixin({
+      created: function a() {}
+    })
+    Vue.Mixin({
+      created: function b() {},
+      mounted: function c() {}
+    })
     const vm = new Vue({
       el: '#app',
       data: {
