@@ -10,7 +10,9 @@ export const HOOKS = [
   'destoryed'
 ]
 const map = {}
-map.data = function() {}
+map.data = function(parentObj, childObj) {
+  return childObj
+}
 map.computed = function() {}
 map.watch = function() {}
 map.methods = function() {}
@@ -38,7 +40,7 @@ export function mergeOptions(parentOptions, childOptions) { // 合并父子选�
   for (let key in childOptions) {
     merge(key)
   }
-  function merge(key) {
+  function merge(key) { // 将外部mixin中的选项和当前vm的选项合并，合并至$options
     if (map[key]) {
       // 若map中有对应key，则调用对应钩子函数的处理方法, 收集结果到合并后的选项
       options[key] = map[key](parentOptions[key], childOptions[key]) // 策略模式减少if-else语句 -> 合并全局的生命周期

@@ -1,16 +1,21 @@
 import { initState } from './state'
 import { compileToFunction } from './compile/index'
-import { mountComponent } from './lifeCycle'
+import { mountComponent, callHook } from './lifeCycle'
+import { mergeOptions } from './utils/merge'
 
 export function initMixin (Vue) {
   Vue.prototype._init = function (options) {
-    console.log('vm', this)
+    console.log('vm', this, 'Vue.options', Vue.options)
     const vm = this
-    vm.$options = options
+    
+    vm.$options = mergeOptions(Vue.options, options) // 选项合并
+    callHook(vm, 'beforeCreate') // 生命周期钩子调用：状态初始化前 -> beforeCreate
     vm.$data = options.data
     vm._self = vm
+
     // init Mixin里的初始化方法， 先进行选项合并、初始化生命周期 & 事件中心 &initState初始化状态
     initState(vm)
+    callHook(vm, 'created') // 生命周期钩子调用：状态初始化前 -> beforeCreate
     
     // 一系列初始化结束后，会执行$mount方法来进行模版编译（vue runtime with compile 版本）
     if (vm.$options.el) {

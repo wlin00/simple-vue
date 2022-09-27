@@ -12,11 +12,17 @@
   <script>
     // 测试mixin
     Vue.Mixin({
-      created: function a() {}
+      created: function a() {
+        console.log('out-a')
+      }
     })
     Vue.Mixin({
-      created: function b() {},
-      mounted: function c() {}
+      mounted: function c() {
+        console.log('out-c')
+      },
+      created: function a() {
+        console.log('out-a2')
+      },
     })
     const vm = new Vue({
       el: '#app',
@@ -25,6 +31,9 @@
         name: 'testABC',
         msg1: [{name: 'inner'}]
       },
+      mounted() {
+        console.log('inner-mounted')
+      }
     })
   </script>
   

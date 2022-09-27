@@ -4,6 +4,5 @@ export function initGlobalApi (Vue)  {
   Vue.options = {}
   Vue.Mixin = function (mixin) { // 定义静态方法Mixin
     this.options = mergeOptions(this.options, mixin)
-    console.log('this.options', this.options)
   }
 }
