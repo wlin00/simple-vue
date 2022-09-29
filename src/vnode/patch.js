@@ -1,9 +1,6 @@
 export function patch(oldDom, vNode) {
-  console.log('old', oldDom, 'cur', vNode)
   // 虚拟Dom生成真实Dom
   const el = createEl(vNode)
-  console.log('generateDom', el)
-  
   // 渲染真实Dom-非Diff版 （1）获取oldDom的父节点，（2）添加新节点（3）删除原来节点 
   let parentNode = oldDom.parentNode
   parentNode.insertBefore(el, oldDom.nextsibling) // 在老节点的下一跳前插入新节点（即插入到老节点后面）
