@@ -1,4 +1,6 @@
 import { newArrayPrototype } from './array'
+import Dep from './dep'
+
 class Observer {
   constructor(data) {
     /**
@@ -33,10 +35,14 @@ class Observer {
 
 function defineReactive(target, key, value) {
   observe(value) // 开始先对当前key对应的value做一次递归挟持，若这个value是普通数据类型就直接不操作; 此处为挟持一开始就为对象的键值value
+  const dep = new Dep() // 建立dep实例，和data中的属性1:1对应
   Object.defineProperty(target, key, {
     configurable: true,
     enumerable: true,
     get() {
+      if (Dep.target) { // 若当前Dep上存在watcher的标记，则可获取到编译的watcher实例，来和当前dep建立绑定关系
+        dep.depend() // 把和当前属性相关的watcher推入到dep.subs中
+      }
       return value
     },
     set(newValue) {
@@ -45,6 +51,9 @@ function defineReactive(target, key, value) {
       }
       observe(newValue) // 此处为了挟持newValue修改为对象后，新对象内部的数据
       value = newValue
+      // 当数据改变引起数据挟持set后，触发订阅器的派发更新，来通知当前属性所对应的watcher数组更新
+      // 后续步骤例如：推入异步队列，watcher排序优化，watcher.run调用_update来渲染vnode & diff & 页面更新
+      dep.notify() 
     }
   })
 }
